@@ -12,7 +12,7 @@ Modal.setAppElement('#root');
 
 
 class TaskList extends Component {
-  
+
   constructor () {
     super();
     this.state = {
@@ -20,11 +20,6 @@ class TaskList extends Component {
       row: {}
     };
 
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleRowSelect = this.handleRowSelect.bind(this);
-    this.onAfterDeleteRow =  this.onAfterDeleteRow.bind(this);
-    
     this.selectRowProp = {
       mode: 'radio',
       //bgColor: 'green', // you should give a bgcolor, otherwise, you can't regonize which row has been selected
@@ -33,24 +28,26 @@ class TaskList extends Component {
       onSelect:this.handleRowSelect
     };
   }
-  handleRowSelect(row, isSelected, e) {
-  console.log(isSelected)
-  console.log(row)
+
+  handleRowSelect = (row, isSelected, e) => {
+    console.log(isSelected)
+    console.log(row)
     this.handleOpenModal(row);
   }
-  async onAfterDeleteRow(row){
+
+  onAfterDeleteRow = async (row) => {
     console.log(row);
   }
-  handleOpenModal (row) {
-    
+
+  handleOpenModal = (row) => {
     this.setState({ showModal: true, row });
   }
-  
-  handleCloseModal () {
+
+  handleCloseModal = () => {
     this.setState({ showModal: false });
   }
-  
-  
+
+
   render() {
     return (
       <div>
@@ -66,8 +63,8 @@ class TaskList extends Component {
           </TableHeaderColumn>
         </BootstrapTable>
          <div>
-        
-        <Modal 
+
+        <Modal
            isOpen={this.state.showModal}
            contentLabel="Task Details">
            <Task task={this.state.row} notes={this.state.row.task_notes}/>
@@ -78,11 +75,5 @@ class TaskList extends Component {
     );
   }
 }
- 
+
 export default TaskList;
-
-
-
-
-
-
